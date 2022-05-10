@@ -41,4 +41,10 @@ public class NoBuyRestController {
         var noBuy = noBuyService.update(id, request);
         return noBuy != null? ResponseEntity.ok(noBuy) : ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping(path = "/api/v1/nobuy{id}")
+    public ResponseEntity<Void> deleteNoBuy(@PathVariable Long id){
+        boolean succesful = noBuyService.deleteById(id);
+        return succesful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
 }

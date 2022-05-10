@@ -25,9 +25,9 @@ public class NoBuyService {
                 .collect(Collectors.toList());
     }
 
-    public NoBuy findbyId(Long id){
+    public NoBuy findbyId(Long id) {
         var noBuyEntity = noBuyRepository.findById(id);
-        return noBuyEntity.isPresent()? transformEntity(noBuyEntity.get()) : null;
+        return noBuyEntity.isPresent() ? transformEntity(noBuyEntity.get()) : null;
     }
 
     public NoBuy create(NoBuyManipulationRequest request) {
@@ -35,9 +35,10 @@ public class NoBuyService {
         noBuyEntity = noBuyRepository.save(noBuyEntity);
         return transformEntity(noBuyEntity);
     }
-    public NoBuy update(Long id, NoBuyManipulationRequest request){
+
+    public NoBuy update(Long id, NoBuyManipulationRequest request) {
         var noBuyEntityOptional = noBuyRepository.findById(id);
-        if(noBuyEntityOptional.isEmpty()){
+        if (noBuyEntityOptional.isEmpty()) {
             return null;
         }
         var noBuyEntity = noBuyEntityOptional.get();
@@ -47,6 +48,14 @@ public class NoBuyService {
         noBuyEntity = noBuyRepository.save(noBuyEntity);
 
         return transformEntity(noBuyEntity);
+    }
+
+    public boolean deleteById(Long id) {
+        if (!noBuyRepository.existsById(id)) {
+            return false;
+        }
+        noBuyRepository.deleteById(id);
+        return false;
     }
 
     private NoBuy transformEntity(NoBuyEntity noBuyEntity) {
