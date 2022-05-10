@@ -21,8 +21,7 @@ public class NoBuyEntity {
     @Column(name = "test")
     private String test;
 
-    public NoBuyEntity(Long id, String category, String description, double value) {
-        this.id = id;
+    public NoBuyEntity(String category, String description, double value) {
         this.category = category;
         this.description = description;
         this.value = value;
